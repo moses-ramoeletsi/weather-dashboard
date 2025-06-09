@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
     <div class="container">
         <header>
             <h1>🌤️ Weather Dashboard</h1>
@@ -16,47 +17,88 @@
         <div class="search-section">
             <div class="search-box">
                 <input type="text" id="cityInput" placeholder="Enter city name..." />
-                <button onclick="getWeather()">Get Weather</button>
+                <button class="btn" onclick="getWeather()">Get Weather</button>
+                <button class="btn" onclick="getCurrentLocation()" style="background: linear-gradient(45deg, #ff6b6b, #ee5a52);">📍 My Location</button>
+            </div>
+            
+            <div class="quick-cities">
+                <button class="city-btn" onclick="quickSearch('London')">London</button>
+                <button class="city-btn" onclick="quickSearch('New York')">New York</button>
+                <button class="city-btn" onclick="quickSearch('Tokyo')">Tokyo</button>
+                <button class="city-btn" onclick="quickSearch('Paris')">Paris</button>
+                <button class="city-btn" onclick="quickSearch('Sydney')">Sydney</button>
+                <button class="city-btn" onclick="quickSearch('Dubai')">Dubai</button>
             </div>
         </div>
-        
+
         <div id="loading" class="loading hidden">
             <div class="spinner"></div>
             <p>Loading weather data...</p>
         </div>
-        
-        <div id="weatherResult" class="weather-card hidden">
-            <h2 id="cityName"></h2>
-            <div class="weather-info">
+
+        <div id="weatherResult" class="main-content hidden">
+            <div class="weather-card">
+                <div id="weatherAnimation" class="weather-animation">☀️</div>
+                <h2 id="cityName"></h2>
                 <div class="temp-section">
                     <span id="temperature" class="temperature"></span>
                     <span class="unit">°C</span>
                 </div>
-                <div class="weather-details">
-                    <p id="description" class="description"></p>
-                    <div class="details-grid">
-                        <div class="detail-item">
-                            <span class="label">Feels like:</span>
-                            <span id="feelsLike"></span>°C
-                        </div>
-                        <div class="detail-item">
-                            <span class="label">Humidity:</span>
-                            <span id="humidity"></span>%
-                        </div>
-                        <div class="detail-item">
-                            <span class="label">Wind Speed:</span>
-                            <span id="windSpeed"></span> km/h
-                        </div>
-                        <div class="detail-item">
-                            <span class="label">Last updated:</span>
-                            <span id="timestamp"></span>
-                        </div>
+                <p id="description" class="description"></p>
+                <div class="details-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
+                    <div class="detail-item" style="background: #f8f9fa; padding: 10px; border-radius: 8px;">
+                        <span class="label">Feels like:</span>
+                        <span id="feelsLike"></span>°C
+                    </div>
+                    <div class="detail-item" style="background: #f8f9fa; padding: 10px; border-radius: 8px;">
+                        <span class="label">Humidity:</span>
+                        <span id="humidity"></span>%
+                    </div>
+                    <div class="detail-item" style="background: #f8f9fa; padding: 10px; border-radius: 8px;">
+                        <span class="label">Wind Speed:</span>
+                        <span id="windSpeed"></span> km/h
+                    </div>
+                    <div class="detail-item" style="background: #f8f9fa; padding: 10px; border-radius: 8px;">
+                        <span class="label">UV Index:</span>
+                        <span id="uvIndex"></span>
                     </div>
                 </div>
             </div>
+
+            <div class="fun-facts">
+                <h3>🎯 Weather Insights</h3>
+                <div id="funFactsContainer"></div>
+                <button class="btn" onclick="generateFunFact()" style="margin-top: 15px; font-size: 14px; padding: 10px 20px;">Get New Fact!</button>
+            </div>
         </div>
-        
-        <div id="error" class="error hidden">
+
+        <div id="forecastSection" class="forecast-section hidden">
+            <!-- Forecast cards will be populated here -->
+        </div>
+
+        <div id="activitiesSection" class="activities-section hidden">
+            <h3>🎯 Recommended Activities</h3>
+            <div id="activitiesGrid" class="activity-grid">
+                <!-- Activities will be populated here -->
+            </div>
+        </div>
+
+        <div id="moodMeter" class="mood-meter hidden">
+            <h3>🌈 Weather Mood Meter</h3>
+            <p id="moodDescription">Perfect weather makes everyone happy!</p>
+            <div class="mood-bar">
+                <div id="moodIndicator" class="mood-indicator"></div>
+            </div>
+            <div id="moodEmoji" style="font-size: 3rem; margin-top: 20px;">😊</div>
+        </div>
+
+        <div id="weatherJoke" class="weather-joke hidden">
+            <h3>😄 Weather Joke of the Day</h3>
+            <p id="jokeText"></p>
+            <button class="btn" onclick="getWeatherJoke()" style="margin-top: 15px;">Another Joke!</button>
+        </div>
+
+        <div id="error" class="error hidden" style="background: #ff6b6b; color: white; padding: 20px; border-radius: 10px; text-align: center; margin: 20px auto; max-width: 500px;">
             <p id="errorMessage"></p>
         </div>
     </div>
