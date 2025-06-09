@@ -1,0 +1,31 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="60" cy="60" r="55" fill="#F8F9FA" stroke="#E9ECEF" stroke-width="2"/>
+  
+  <!-- Sun -->
+  <circle cx="45" cy="35" r="8" fill="#FFB800"/>
+  
+  <!-- Cloud -->
+  <g fill="#6C757D">
+    <circle cx="75" cy="45" r="8"/>
+    <circle cx="85" cy="45" r="6"/>
+    <circle cx="65" cy="45" r="6"/>
+  </g>
+  
+  <!-- Rain drops -->
+  <g fill="#007BFF">
+    <circle cx="70" cy="60" r="1.5"/>
+    <circle cx="80" cy="65" r="1.5"/>
+    <circle cx="75" cy="70" r="1.5"/>
+  </g>
+  
+  <!-- Dashboard line -->
+  <line x1="25" y1="85" x2="95" y2="85" stroke="#DEE2E6" stroke-width="1"/>
+  
+  <!-- Simple data points -->
+  <g fill="#495057">
+    <circle cx="35" cy="85" r="2"/>
+    <circle cx="60" cy="85" r="2"/>
+    <circle cx="85" cy="85" r="2"/>
+  </g>
+</svg>
